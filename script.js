@@ -1,4 +1,4 @@
-// ============ INITIALIZATION ============
+
 
 const cards = [
   { id: 1, revealed: false, spread: false, x: 0, y: 0, rotation: 0, zIndex: 6 },
@@ -14,17 +14,17 @@ let isShuffling = false
 let noteRevealed = false
 let maxZIndex = 10
 
-// Slider state
+
 let isDragging = false
 let dragProgress = 0
 let dragStartX = 0
 let currentX = 0
 
-// Card dragging state
+
 let draggingCardId = null
 let cardDragStart = { x: 0, y: 0, cardX: 0, cardY: 0 }
 
-// ============ BACKGROUND EFFECTS ============
+
 function createBokehEffects() {
   const container = document.getElementById("bokeh-container")
   for (let i = 0; i < 20; i++) {
@@ -51,7 +51,7 @@ function createFloatingHearts() {
   }
 }
 
-// ============ NAVIGATION ============
+
 function scrollToStage2() {
   document.getElementById("stage-2").scrollIntoView({ behavior: "smooth" })
 }
@@ -60,7 +60,7 @@ function scrollToStage3() {
   document.getElementById("stage-3").scrollIntoView({ behavior: "smooth" })
 }
 
-// ============ STAGE 2 - SLIDER ============
+
 function initSlider() {
   const handle = document.getElementById("slider-handle")
 
@@ -136,7 +136,7 @@ function triggerMagicalParticles() {
   }
 }
 
-// ============ STAGE 3 - CARDS ============
+
 function createCards() {
   const wrapper = document.getElementById("cards-wrapper")
 
@@ -150,7 +150,7 @@ function createCards() {
     }
   })
 
-  // Remove image source divs after reading their data
+
   cardImageSources.forEach((source) => source.remove())
 
   cards.forEach((card, index) => {
@@ -209,7 +209,7 @@ function renderCards() {
   })
 }
 
-// Card Click
+
 function handleCardClick(e, cardId) {
   if (draggingCardId !== null) return
 
@@ -243,7 +243,7 @@ function createClickParticles(e, cardId) {
   }
 }
 
-// Card Dragging
+
 function handleCardMouseDown(e, cardId) {
   if (!isSpread || e.target.closest(".click-particle")) return
   startCardDrag(e.clientX, e.clientY, cardId)
@@ -306,7 +306,7 @@ function handleCardDragEnd() {
   }
 }
 
-// Shuffle Cards
+
 async function shuffleCards() {
   if (isShuffling) return
   isShuffling = true
@@ -327,7 +327,7 @@ async function shuffleCards() {
     await new Promise((resolve) => setTimeout(resolve, 150))
   }
 
-  // Final settle
+
   cards.sort(() => Math.random() - 0.5)
   cards.forEach((card, i) => {
     if (!isSpread) {
@@ -344,7 +344,7 @@ async function shuffleCards() {
   shuffleBtn.querySelector(".button-text").textContent = "✨ Shuffle Cards"
 }
 
-// Spread Cards
+
 function spreadCards() {
   isSpread = !isSpread
 
@@ -391,10 +391,11 @@ function spreadCards() {
   renderCards()
 }
 
-// ============ INITIALIZE ============
+
 document.addEventListener("DOMContentLoaded", () => {
   createBokehEffects()
   createFloatingHearts()
   initSlider()
   createCards()
+
 })
